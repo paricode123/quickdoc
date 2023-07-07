@@ -30,7 +30,8 @@ class _HomePageState extends State<HomePage> {
   bool showThirdRow = false;
   bool showAllDoctors = false;
 
-  Future<void> fetchData() async {
+  // health tips api function
+  Future<void> tipData() async {
     final url = Uri.parse('https://thetechnicalsolution.in/quikdoc/Api/health_tips.php');
 
     try {
@@ -53,6 +54,29 @@ class _HomePageState extends State<HomePage> {
       print('Error: $error');
     }
   }
+
+
+  // doctor cetagory
+  Future<void> fetchData() async {
+    var url = Uri.parse('https://thetechnicalsolution.in/quikdoc/Api/doctor_category.php');
+
+    // Make the HTTP GET request
+    var response = await http.post(url);
+
+    if (response.statusCode == 200) {
+      // Parse the JSON response
+      var jsonData = jsonDecode(response.body);
+      // Access the "message" field in the response
+      var message = jsonData['message'];
+
+      // Perform further processing with the "message" data
+      // ...
+
+    } else {
+      print('Request failed with status: ${response.statusCode}');
+    }
+  }
+
 
 
   @override
